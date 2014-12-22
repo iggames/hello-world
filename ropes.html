@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Rope Tests</title>
+		<script type="text/javascript" src="ropes.js"></script>
+      <script>
+         function toggleGameVars() {
+            var link = document.getElementById('toggle');
+            var vars = document.getElementById('game_vars');
+            if (vars.style.display != 'none') {
+               link.innerHTML = 'show';
+               vars.style.display = 'none';
+            }
+            else {
+               link.innerHTML = 'hide';
+               vars.style.display = '';
+            }
+         }
+      </script>
+	</head>
+	<body bgcolor="white" text="black">
+		<canvas id="game" width="800" height="600" style="border:1px dotted"></canvas>
+      <h3>Rope Tests</h3>
+      Ultimately, this may be kind of like Liero. But simpler. Maybe.
+      <ul>
+         <li><b>Left-Click</b>: shoot</li>
+         <li><b>Right-Click</b>: rope</li>
+      </ul>
+      <b>Game variables</b> (<a id="toggle" href="#" onclick="toggleGameVars()">show</a>)
+      <form id="game_vars" style="display:none">
+         <table>
+            <tr><td>Rope speed:</td><td><input type="text" name="ROPE_SPEED" size="5" value="0.6"></td></tr>
+            <tr><td>Rope spring:</td><td><input type="text" name="ROPE_SPRING" size="5" value="0.005"></td></tr>
+            <tr><td>Rope friction:</td><td><input type="text" name="ROPE_FRICTION" size="5" value="0.01"></td></tr>
+            <tr><td>Gravity:</td><td><input type="text" name="GRAVITY" size="5" value="0.0005"></td></tr>
+         </table>
+         <input type="button" name="update" value="Update" onClick="getConstantsFromDOM()"/>
+      </form>
+	</body>
+</html>

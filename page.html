@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Lunar Rescue</title>
+		<script type="text/javascript" src="code.js"></script>
+      <script>
+         function toggleGameVars() {
+            var link = document.getElementById('toggle');
+            var vars = document.getElementById('game_vars');
+            if (vars.style.display != 'none') {
+               link.innerHTML = 'show';
+               vars.style.display = 'none';
+            }
+            else {
+               link.innerHTML = 'hide';
+               vars.style.display = '';
+            }
+         }
+      </script>
+	</head>
+	<body bgcolor="black" text="white">
+		<canvas id="game" width="800" height="600" style="border:1px dotted"></canvas>
+      <h3>Lunar Rescue</h3>
+      Save the stranded scientists! Land gently, but watch your fuel! (Refuel at landing pads)
+      <ul>
+         <li><b>Thrust</b>: up arrow</li>
+         <li><b>Turn</b>: left/right arrow</li>
+      </ul>
+      <b>Game variables</b> (<a id="toggle" href="#" onclick="toggleGameVars()">show</a>)
+      <form id="game_vars" style="display:none">
+         <table>
+            <tr><td>Move speed:</td><td><input type="text" name="MOVE_SPEED" size="5" value="0.0005"> (higher numbers make you move faster; if it's lower than gravity, you can't lift off)</td></tr>
+            <tr><td>Crash speed:</td><td><input type="text" name="CRASH_SPEED" size="5" value="0.2"> (higher numbers let you land at higher speeds -- this makes it easier to land)</td></tr>
+            <tr><td>Gravity:</td><td><input type="text" name="GRAVITY" size="5" value="0.0003"> (higher numbers make it harder to fly upwards, and pull you to the ground faster)</td></tr>
+            <tr><td>Rotate speed:</td><td><input type="text" name="ROT_SPEED" size="5" value="0.002"> (higher numbers make you spin faster -- easier to change direction, harder to land straight up)</td></tr>
+            <tr><td>Fuel use:</td><td><input type="text" name="FUEL_USE" size="5" value="0.02"> (higher numbers use your fuel up more quickly -- lowering this number effectively gives you "more fuel")</td></tr>
+         </table>
+         <input type="button" name="update" value="Update" onClick="getConstantsFromDOM()"/>
+      </form>
+	</body>
+</html>

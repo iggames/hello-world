@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Shooter Tests</title>
+		<script type="text/javascript" src="shooter.js"></script>
+      <script>
+         function toggleGameVars() {
+            var link = document.getElementById('toggle');
+            var vars = document.getElementById('game_vars');
+            if (vars.style.display != 'none') {
+               link.innerHTML = 'show';
+               vars.style.display = 'none';
+            }
+            else {
+               link.innerHTML = 'hide';
+               vars.style.display = '';
+            }
+         }
+      </script>
+	</head>
+	<body bgcolor="white" text="black">
+		<canvas id="game" width="800" height="600" style="border:1px dotted"></canvas>
+      <h3>Shooter Tests</h3>
+      Ultimately, this may be kind of like Crimsonland. You'll be a tank, and you'll shoot spiders.
+      <ul>
+         <li><b>WASD</b>: move</li>
+         <li><b>Left-Click</b>: shoot</li>
+      </ul>
+      <b>Game variables</b> (<a id="toggle" href="#" onclick="toggleGameVars()">show</a>)
+      <form id="game_vars" style="display:none" onKeyDown="if (event.keyCode == 13) getConstantsFromDOM()">
+         <table>
+            <tr><td>Player color:</td><td><input type="text" name="PLAYER_COLOR" size="5" value="#aa2211"></td></tr>
+            <tr><td>Player size:</td><td><input type="text" name="PLAYER_SIZE" size="5" value="15"></td></tr>
+            <tr><td>Player tread color:</td><td><input type="text" name="PLAYER_TREAD_COLOR" size="5" value="#aaaaaa"></td></tr>
+            <tr><td>Player tread size:</td><td><input type="text" name="PLAYER_TREAD_SIZE" size="5" value="6"></td></tr>
+            <tr><td>Player speed:</td><td><input type="text" name="PLAYER_SPEED" size="5" value="0.15"></td></tr>
+            <tr><td>Player turn speed:</td><td><input type="text" name="PLAYER_TURN" size="5" value="0.003"></td></tr>
+            <tr><td>Enemy color:</td><td><input type="text" name="ENEMY_COLOR" size="5" value="#1199aa"></td></tr>
+            <tr><td>Enemy size:</td><td><input type="text" name="ENEMY_SIZE" size="5" value="15"></td></tr>
+            <tr><td>Enemy speed:</td><td><input type="text" name="ENEMY_SPEED" size="5" value="0.13"></td></tr>
+            <tr><td>Enemy turn speed:</td><td><input type="text" name="ENEMY_TURN" size="5" value="0.003"></td></tr>
+         </table>
+         <input type="button" name="update" value="Update" onClick="getConstantsFromDOM()"/>
+      </form>
+	</body>
+</html>

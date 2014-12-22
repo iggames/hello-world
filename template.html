@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Template</title>
+		<script type="text/javascript" src="template.js"></script>
+      <script>
+         function toggleGameVars() {
+            var link = document.getElementById('toggle');
+            var vars = document.getElementById('game_vars');
+            if (vars.style.display != 'none') {
+               link.innerHTML = 'show';
+               vars.style.display = 'none';
+            }
+            else {
+               link.innerHTML = 'hide';
+               vars.style.display = '';
+            }
+         }
+      </script>
+	</head>
+	<body bgcolor="black" text="white">
+		<canvas id="game" width="800" height="600"></canvas>
+      <h3>Title</h3>
+      <p>Description.</p>
+      <ul>
+         <li><b>Keys</b>: do stuff</li>
+      </ul>
+
+      <b>Game variables</b> (<a id="toggle" href="#" onclick="toggleGameVars()">show</a>)
+      <form id="game_vars" style="display:none" onKeyDown="if (event.keyCode == 13) { getConstantsFromDOM() }">
+         <table>
+            <tr><td>Var:</td><td><input type="text" name="VAR" size="5" value="1"></td></tr>
+         </table>
+         <input type="button" name="update" value="Update" onClick="getConstantsFromDOM()"/>
+      </form>
+	</body>
+</html>
