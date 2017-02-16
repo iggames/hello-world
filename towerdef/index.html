@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+	   <title>Tower Def</title>
+	</head>
+   <body bgcolor="black" text="white">
+      <script type="text/javascript" src="js/RequestAnimationFrame.js"></script>
+		<script type="text/javascript" src="js/Stats.js"></script>
+      <script>
+         var stats = new Stats();
+
+         // Align top-left
+         stats.getDomElement().style.position = 'absolute';
+         stats.getDomElement().style.left = '0px';
+         stats.getDomElement().style.top = '0px';
+
+         if ( document.URL.indexOf( "showFps=1" ) >= 0 ) {
+            document.body.appendChild( stats.getDomElement() );
+         }
+      </script>
+		<script type="text/javascript" src="js/input.js"></script>
+		<script type="text/javascript" src="js/resources.js"></script>
+		<script type="text/javascript" src="js/collision.js"></script>
+      <script type="text/javascript" src="js/actor.js"></script>
+      <script type="text/javascript" src="js/worm.js"></script>
+      <script type="text/javascript" src="js/shooter.js"></script>
+      <script type="text/javascript" src="js/bullet.js"></script>
+      <script type="text/javascript" src="js/level.js"></script>
+      <script type="text/javascript" src="js/pathfinding.js"></script>
+      <script type="text/javascript" src="js/world.js"></script>
+      <script type="text/javascript" src="js/game.js"></script>
+      <canvas id="game" width="1024" height="768"></canvas>
+	</body>
+</html>

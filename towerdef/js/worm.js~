@@ -1,0 +1,54 @@
+var HEAD_SIZE = 10, TAIL_SIZE = 1, SEGMENTS = 80, SIZE_RATE = (HEAD_SIZE - TAIL_SIZE) / SEGMENTS;
+var TURN_SPEED = 0.0015;
+
+function Worm() {
+   this.speed = 0.07;
+}
+Worm.inherits( Actor );
+
+Worm.prototype.spawn = function( x, y ) {
+   this.pos = [ [ x, y ] ];
+   this.ang = this.goalAng = Math.PI;
+}
+Worm.prototype.update = function( dt ) {
+   this.pos.unshift( [ this.pos[0][0] + this.speed * dt * Math.cos(this.ang), this.pos[0][1] + this.speed * dt * Math.sin(this.ang) ] );
+
+   if (this.pos.length > SEGMENTS) {
+      this.pos.pop();
+   }
+
+   if (this.ang < this.goalAng) {
+      this.ang += TURN_SPEED * dt;
+      if (this.ang > this.goalAng)
+         this.ang = this.goalAng;
+   }
+   else if (this.ang > this.goalAng) {
+      this.ang -= TURN_SPEED * dt;
+      if (this.ang < this.goalAng)
+         this.ang = this.goalAng;
+   }
+}
+Worm.prototype.draw = function( context ) {
+   context.strokeStyle = "#000";
+   context.lineWidth = 2;
+   context.fillStyle = "#432";
+
+   // Outline
+   for ( var i = 0; i < this.pos.length; i ++ ) {
+      context.beginPath(); {
+         context.arc( this.pos[i][0], this.pos[i][1], HEAD_SIZE - SIZE_RATE * i, 0, Math.PI*2, true );
+         context.stroke();
+      }
+      context.closePath();
+   }
+
+   // Fill
+   for ( var i = 0; i < this.pos.length; i ++ ) {
+      context.beginPath(); {
+         context.arc( this.pos[i][0], this.pos[i][1], HEAD_SIZE - SIZE_RATE * i, 0, Math.PI*2, true );
+         context.fill();
+      }
+      context.closePath();
+   }
+}
+

@@ -1,0 +1,83 @@
+function World() {
+   // Level
+   // TEMP: this should come from a file at some point
+   var tiles = [
+      [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, ],
+      [ 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+      [ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+   ];
+
+   this.level = new Level( tiles );
+
+   // Shooters
+   this.shooters = new Array();
+   this.bullets = new Array();
+
+   for (var i = 0; i < 3; i ++) {
+      this.shooters.push( new Shooter() );
+   }
+   this.shooters[0].spawn( 2 * GRID_SIZE + GRID_SIZE/2, 3 * GRID_SIZE + GRID_SIZE/2 );
+   this.shooters[1].spawn( 12 * GRID_SIZE + GRID_SIZE/2, 1 * GRID_SIZE + GRID_SIZE/2 );
+   this.shooters[2].spawn( 0 * GRID_SIZE + GRID_SIZE/2, 12 * GRID_SIZE + GRID_SIZE/2 );
+
+   // Worms
+   this.worms = new Array();
+   this.worms.push( new Worm() );
+   this.worms[0].spawn( 23 * GRID_SIZE + GRID_SIZE/2, 16 * GRID_SIZE + GRID_SIZE/2 );
+
+   // Time
+   this.lastTime = new Date().getTime();
+}
+
+World.prototype.update() {
+   this.now = new Date().getTime();
+   this.dt = this.now - this.lastTime;
+   this.lastTime = this.now;
+
+   for ( var i = 0; i < this.worms.length; i ++ ) {
+      this.worms[i].update( this );
+   }
+   for ( var i = 0; i < this.shooters.length; i ++ ) {
+      this.shooters[i].update( this );
+   }
+}
+
+World.prototype.draw( context ) {
+   context.fillStyle = "#222";
+   context.fillRect( 0, 0, canvas.width, canvas.height );
+
+   level.draw( context );
+   for ( var i = 0; i < bullets.length; i ++ ) {
+      this.bullets[i].draw( context );
+   }
+   for ( var i = 0; i < shooters.length; i ++ ) {
+      this.shooters[i].draw( context );
+   }
+   for ( var i = 0; i < shooters.length; i ++ ) {
+      this.worms[i].draw( context );
+   }
+   
+   //drawPath( context, path );
+}
