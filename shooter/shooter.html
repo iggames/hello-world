@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Shooter Tests</title>
+		<script type="text/javascript" src="entity.js"></script>
+		<script type="text/javascript" src="player.js"></script>
+		<script type="text/javascript" src="enemy.js"></script>
+		<script type="text/javascript" src="bullet.js"></script>
+		<script type="text/javascript" src="level.js"></script>
+		<script type="text/javascript" src="shooter.js"></script>
+      <script>
+         function toggleGameVars() {
+            var link = document.getElementById('toggle');
+            var vars = document.getElementById('game_vars');
+            if (vars.style.display != 'none') {
+               link.innerHTML = 'show';
+               vars.style.display = 'none';
+            }
+            else {
+               link.innerHTML = 'hide';
+               vars.style.display = '';
+            }
+         }
+      </script>
+	</head>
+	<body bgcolor="black" text="white">
+		<canvas id="game" width="800" height="600" style="border:1px dotted"></canvas>
+      <h3>Shooter Tests</h3>
+      Ultimately, this may be kind of like Crimsonland. You'll be a tank, and you'll shoot spiders.
+      <ul>
+         <li><b>WASD</b>: move</li>
+         <li><b>Left-Click</b>: shoot</li>
+      </ul>
+      <b>Game variables</b> (<a id="toggle" href="#" onclick="toggleGameVars()">show</a>)
+      <form id="game_vars" style="display:none" onKeyDown="if (event.keyCode == 13) getConstantsFromDOM()">
+         <table>
+            <tr><td>Player color:</td><td><input type="text" name="PLAYER_COLOR" size="5" value="#aa2211"></td></tr>
+            <tr><td>Player size:</td><td><input type="text" name="PLAYER_SIZE" size="5" value="15"></td></tr>
+            <tr><td>Player tread color:</td><td><input type="text" name="PLAYER_TREAD_COLOR" size="5" value="#aaaaaa"></td></tr>
+            <tr><td>Player tread size:</td><td><input type="text" name="PLAYER_TREAD_SIZE" size="5" value="6"></td></tr>
+            <tr><td>Player turret size:</td><td><input type="text" name="PLAYER_TURRET_SIZE" size="5" value="8"></td></tr>
+            <tr><td>Player speed:</td><td><input type="text" name="PLAYER_SPEED" size="5" value="0.15"></td></tr>
+            <tr><td>Player turn speed:</td><td><input type="text" name="PLAYER_TURN" size="5" value="0.005"></td></tr>
+            <tr><td>Player shoot delay:</td><td><input type="text" name="PLAYER_SHOOT_DELAY" size="5" value="300"></td></tr>
+            <tr><td>Player lamp FOV:</td><td><input type="text" name="PLAYER_LAMP_FOV" size="5" value="0.3927"></td></tr>
+            <tr><td>Player lamp resolution:</td><td><input type="text" name="PLAYER_LAMP_RES" size="5" value="32"></td></tr>
+            <tr><td>Player ambient resolution:</td><td><input type="text" name="PLAYER_AMB_RES" size="5" value="48"></td></tr>
+            <tr><td>Player ambient distance:</td><td><input type="text" name="PLAYER_AMB_DIST" size="5" value="160"></td></tr>
+            <tr><td>Enemy color:</td><td><input type="text" name="ENEMY_COLOR" size="5" value="#222222"></td></tr>
+            <tr><td>Enemy size:</td><td><input type="text" name="ENEMY_SIZE" size="5" value="15"></td></tr>
+            <tr><td>Enemy speed:</td><td><input type="text" name="ENEMY_SPEED" size="5" value="0.05"></td></tr>
+            <tr><td>Enemy turn speed:</td><td><input type="text" name="ENEMY_TURN" size="5" value="0.002"></td></tr>
+            <tr><td>Space between enemies:</td><td><input type="text" name="ENEMY_PADDING" size="5" value="15"></td></tr>
+            <tr><td>Enemy count:</td><td><input type="text" name="ENEMY_COUNT" size="5" value="10"></td></tr>
+            <tr><td>Bullet size:</td><td><input type="text" name="BULLET_SIZE" size="5" value="5"></td></tr>
+            <tr><td>Bullet speed:</td><td><input type="text" name="BULLET_SPEED" size="5" value="0.4"></td></tr>
+         </table>
+         <input type="button" name="update" value="Update" onClick="getConstantsFromDOM()"/>
+      </form>
+	</body>
+</html>
