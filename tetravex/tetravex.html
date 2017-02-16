@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Tetravex</title>
+		<script type="text/javascript" src="tetravex.js"></script>
+      <script>
+         function toggleGameVars() {
+            var link = document.getElementById('toggle');
+            var vars = document.getElementById('game_vars');
+            if (vars.style.display != 'none') {
+               link.innerHTML = 'show';
+               vars.style.display = 'none';
+            }
+            else {
+               link.innerHTML = 'hide';
+               vars.style.display = '';
+            }
+         }
+         function setSize() {
+            var sizeGroup = document.forms[0];
+            var newSize = 3;
+
+            for (var i = 0; i < sizeGroup.length; i ++) {
+               if (sizeGroup[i].checked)
+                  newSize = parseInt(sizeGroup[i].value);
+            }
+
+            constants.BOARD_SIZE = newSize;
+
+            document.getElementById('game').width = (constants.BOARD_SIZE + 0.3) * constants.TILE_SIZE;
+            document.getElementById('game').height = (constants.BOARD_SIZE * 2 + 1) * constants.TILE_SIZE;
+
+            init();
+         }
+      </script>
+      <meta name="viewport" content="width = device-width"/>
+   </head>
+   <body bgcolor="black" text="white">
+      <table>
+         <tr>
+            <td>
+               <canvas id="game" width="160" height="364"></canvas>
+            </td>
+            <td valign="top">
+               <h3>Tetravex</h3>
+               <p>Arrange the tiles so that colors match.</p>
+
+               <form name="size" onclick="setSize()">
+                  <input type="radio" name="size" value="2">2</input>
+                  <input type="radio" name="size" value="3" checked>3</input>
+                  <input type="radio" name="size" value="4">4</input>
+                  <input type="radio" name="size" value="5">5</input>
+                  <input type="radio" name="size" value="6">6</input>
+               </form>
+
+               <b>Game variables</b> (<a id="toggle" href="#" onclick="toggleGameVars()">show</a>)
+               <form id="game_vars" style="display:none" onKeyDown="if (event.keyCode == 13) { getConstantsFromDOM(); draw() }">
+                  <table>
+                     <tr><td>Tile size:</td><td><input type="text" name="TILE_SIZE" size="5" value="52"></td></tr>
+                     <tr><td>Board size:</td><td><input type="text" name="BOARD_SIZE" size="5" value="3"></td></tr>
+                     <tr><td>Disconnected alpha:</td><td><input type="text" name="DISCONNECTED_ALPHA" size="5" value="0.6"></td></tr>
+                     <tr><td>Colors:</td><td><input type="text" name="NUM_COLORS" size="5" value="9"></td></tr>
+                     <tr><td>Color 1:</td><td><input type="text" name="COLOR_0" size="5" value="#f00"></td></tr>     <!-- red -->
+                     <tr><td>Color 2:</td><td><input type="text" name="COLOR_1" size="5" value="#f80"></td></tr>     <!-- orange -->
+                     <tr><td>Color 3:</td><td><input type="text" name="COLOR_2" size="5" value="#ff0"></td></tr>     <!-- yellow -->
+                     <tr><td>Color 4:</td><td><input type="text" name="COLOR_3" size="5" value="#0f0"></td></tr>     <!-- green -->
+                     <tr><td>Color 5:</td><td><input type="text" name="COLOR_4" size="5" value="#00f"></td></tr>     <!-- blue  -->
+                     <tr><td>Color 6:</td><td><input type="text" name="COLOR_5" size="5" value="#0ff"></td></tr>     <!-- light blue -->
+                     <tr><td>Color 7:</td><td><input type="text" name="COLOR_6" size="5" value="#90f"></td></tr>     <!-- purple -->
+                     <tr><td>Color 8:</td><td><input type="text" name="COLOR_7" size="5" value="#f0f"></td></tr>     <!-- pink -->
+                     <tr><td>Color 9:</td><td><input type="text" name="COLOR_8" size="5" value="#555"></td></tr>     <!-- black -->
+                  </table>
+                  <input type="button" name="update" value="Update" onClick="getConstantsFromDOM()"/>
+               </form>
+            </td>
+         </tr>
+      </table>
+	</body>
+</html>
